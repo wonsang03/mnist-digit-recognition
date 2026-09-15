@@ -1,0 +1,13 @@
+# Created: 2025-09-15
+# Install everything with:  pip install -r requirements.txt
+
+# Deep learning framework and the MNIST dataset loader
+torch>=2.0
+torchvision>=0.15
+
+# Numerical helpers and image handling (canvas -> 28x28 tensor)
+numpy>=1.24
+pillow>=10.0
+
+# Web version only
+flask>=3.0

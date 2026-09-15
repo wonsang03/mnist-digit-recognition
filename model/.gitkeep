@@ -1,0 +1,1 @@
+# Keep the model folder in git even though the weights are ignored.

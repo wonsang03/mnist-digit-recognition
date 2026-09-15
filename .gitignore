@@ -1,0 +1,21 @@
+# Created: 2025-09-15
+
+# MNIST dataset downloaded on the first run (about 55 MB)
+data/
+
+# Trained weights are a build artifact: run train_model.py to regenerate them
+model/*.pt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

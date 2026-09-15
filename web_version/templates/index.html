@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Created: 2025-09-15 | Web front end for the MNIST digit recognizer -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handwritten Digit Recognition</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>Handwritten Digit Recognition</h1>
+        <p>Draw a digit from 0 to 9, then press Recognize.</p>
+      </header>
+
+      <section class="board">
+        <div class="board__draw">
+          <canvas id="canvas" width="280" height="280"></canvas>
+          <div class="board__buttons">
+            <button id="clear" class="btn btn--clear" type="button">Clear</button>
+            <button id="recognize" class="btn btn--recognize" type="button">
+              Recognize
+            </button>
+          </div>
+          <p class="hint">Tip: Enter recognizes, Esc clears.</p>
+        </div>
+
+        <aside class="board__result">
+          <p class="label">PREDICTION</p>
+          <p id="digit" class="digit">-</p>
+          <p id="confidence" class="confidence">Confidence: -</p>
+
+          <p class="label">MODEL INPUT (28 x 28)</p>
+          <img id="preview" class="preview" alt="28 by 28 network input" />
+
+          <p class="label">ALL SCORES</p>
+          <ul id="scores" class="scores"></ul>
+        </aside>
+      </section>
+
+      <p id="status" class="status" role="status"></p>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
