@@ -126,6 +126,12 @@
   }
 
   function recognize() {
+    // Enter also triggers a click on the focused Recognize button, so the
+    // disabled flag is checked here too and not only on the button.
+    if (recognizeButton.disabled) {
+      return;
+    }
+
     if (!hasDrawing) {
       setStatus("Draw a digit first.", true);
       return;

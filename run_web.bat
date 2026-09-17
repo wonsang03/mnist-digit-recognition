@@ -22,7 +22,7 @@ if errorlevel 1 (
 )
 
 if not exist "model\mnist_cnn.pt" (
-    echo [1/3] No trained model found. Training on MNIST now.
+    echo [1/2] No trained model found. Training on MNIST now.
     echo       The first run downloads the dataset and takes a few minutes.
     echo.
     python train_model.py
@@ -35,16 +35,16 @@ if not exist "model\mnist_cnn.pt" (
         exit /b 1
     )
 ) else (
-    echo [1/3] Trained model found. Skipping training.
+    echo [1/2] Trained model found. Skipping training.
 )
 
 echo.
-echo [2/3] Opening http://localhost:5000 in your browser...
-start "" "http://localhost:5000"
-
-echo [3/3] Starting the Flask server. Press Ctrl+C to stop it.
+echo [2/2] Starting the Flask server. The browser opens once it is ready.
+echo       Press Ctrl+C to stop it.
 echo.
-python web_version\app.py
+REM The server opens the browser itself: a browser launched from here raced
+REM ahead of model loading and landed on a connection-refused page.
+python web_version\app.py --open-browser
 if errorlevel 1 (
     echo.
     echo [ERROR] The server exited with an error.

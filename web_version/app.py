@@ -15,7 +15,10 @@ import argparse
 import base64
 import binascii
 import io
+import os
 import sys
+import threading
+import webbrowser
 from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
@@ -117,6 +120,11 @@ def main() -> None:
     parser.add_argument("--host", default="127.0.0.1", help="host to bind to")
     parser.add_argument("--port", type=int, default=5000, help="port to bind to")
     parser.add_argument("--debug", action="store_true", help="enable debug mode")
+    parser.add_argument(
+        "--open-browser",
+        action="store_true",
+        help="open the page in the default browser once the server is listening",
+    )
     args = parser.parse_args()
 
     if not MODEL_PATH.exists():
@@ -132,6 +140,13 @@ def main() -> None:
     print(f"  Open http://localhost:{args.port} in your browser")
     print("  Press Ctrl+C to stop the server")
     print("=" * 58)
+
+    # The browser is opened from here, not from the launcher script: model
+    # loading above takes a few seconds, and a browser started before that
+    # finished would land on a connection-refused page.
+    if args.open_browser and not os.environ.get("WERKZEUG_RUN_MAIN"):
+        url = f"http://localhost:{args.port}"
+        threading.Timer(1.0, lambda: webbrowser.open(url)).start()
 
     app.run(host=args.host, port=args.port, debug=args.debug)
 
