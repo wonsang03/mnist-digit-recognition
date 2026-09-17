@@ -19,3 +19,6 @@ env/
 .idea/
 Thumbs.db
 desktop.ini
+
+# Claude Code project instructions: local notes, not part of the deliverable
+CLAUDE.md
